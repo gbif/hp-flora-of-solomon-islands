@@ -3,6 +3,11 @@ This is the fil in which you configure the data widgets. Feel free to experiment
 But it is also completely okay to write and issue and ask for help to configure the widgets.
 You probably want to check out the documentation at https://hp-theme.gbif-staging.org/documentation-intro
 */
+
+const DATASET_KEYS = [
+  "154947b6-0e29-40da-962f-a0d6e3f12a07"
+]
+
 var siteConfig = {
   "version": 3,
   "pages": [ // which pages do we want to enable
@@ -92,12 +97,8 @@ var siteConfig = {
   "occurrenceSearch": {
     "scope": {
       "type": "in",
-      "key": "publishingOrg",
-      "values": [
-        "760d5f24-4c04-40da-9646-1b2c935da502",
-        "2e7df380-8356-4533-bcb3-5459e23c794e",
-        "8e1a97a0-3ca8-11d9-8439-b8a03c50a862"
-      ]
+      "key": "datasetKey",
+      "values": DATASET_KEYS,
     },
     "highlightedFilters": [
       "taxonKey",
