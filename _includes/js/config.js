@@ -111,7 +111,17 @@ var siteConfig = {
       "mapTileLocale": "en"
     }
   ],
-  "messages": {},
+  // Overrides of the widget's built-in wording, per language. Keys and default text:
+  // https://react-components.gbif.org/lib/translations/en.json
+  "messages": {
+    "en": {
+      // Result count above the occurrence table: "13,647 records" instead of "results".
+      "counts.nResults": "{total, plural, one {# record} other {# records}}",
+      // Same wording for the Gallery count ("… with images") and its coordinates variant.
+      "counts.nResultsWithImages": "{total, plural, one {# record} other {# records}} with images",
+      "counts.nResultsWithCoordinates": "{total, plural, one {# record} other {# records}} with coordinates"
+    }
+  },
   "occurrenceSearch": {
     "scope": {
       "type": "in",
