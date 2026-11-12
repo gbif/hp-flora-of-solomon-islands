@@ -18,3 +18,26 @@ body > footer.fsi-orgbar {
 body:has(> footer.fsi-orgbar) #smallViewportHeightElement {
   height: calc(100svh - 56px) !important;
 }
+
+// Result count above the occurrence views ("13,647 records"). The widget renders it
+// at text-xs in slate-500, which is small and below 4.5:1 on the shell ground.
+// It has no class name of its own, so match the widget's utility classes.
+// Table, Map and Related: the count is the first child of the view column.
+#root.gbif .g-flex.g-flex-col.g-h-full > .g-text-xs.g-text-slate-500.g-mb-1 {
+  font-size: 15px;
+  margin: 0.2rem 0 0.6rem 0.5rem;
+  color: $fsi-ink-muted;
+}
+
+// Gallery: the count ("… with images") sits in its own flex row, which carries the
+// spacing, so the margins go on the row to line up with the other views. The row is
+// 20 px tall (it also holds a menu button) against the 16 px text line, so take the
+// 2 px the text is centred by off the top and bottom margins.
+#root.gbif .g-flex.g-items-center.g-justify-between.g-mb-1:has(> .g-text-xs.g-text-slate-500.g-mb-0:first-child) {
+  margin: calc(0.2rem - 2px) 0 calc(0.6rem - 2px) 0.5rem;
+
+  > .g-text-xs.g-text-slate-500.g-mb-0:first-child {
+    font-size: 15px;
+    color: $fsi-ink-muted;
+  }
+}
