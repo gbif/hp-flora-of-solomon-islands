@@ -1,0 +1,16 @@
+{% comment %} Home: "About the collection". Short text beside one photograph with its caption. {% endcomment %}
+{% assign c = include.content %}
+
+<section class="fsi fsi-section fsi-about" aria-labelledby="fsi-about-title">
+  <div class="fsi-wrap fsi-section__inner fsi-about__inner">
+    <div class="fsi-about__text">
+      <h2 id="fsi-about-title">{{ c.title }}</h2>
+      {{ c.text | markdownify }}
+      {% if c.placeholder %}<p class="fsi-about__placeholder">{{ c.placeholder }}</p>{% endif %}
+    </div>
+    <figure class="fsi-about__figure">
+      <div class="fsi-photo"><img src="{{ c.image.src | relative_url }}" alt="{{ c.image.alt }}" width="1200" height="800" loading="lazy"></div>
+      <figcaption>{{ c.image.caption }}</figcaption>
+    </figure>
+  </div>
+</section>

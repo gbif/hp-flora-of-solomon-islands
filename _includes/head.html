@@ -1,0 +1,11 @@
+{% comment %} Site additions to <head>. Replaces the theme's head.html, so its Plausible hook is kept here. {% endcomment %}
+{% if site.plausible.enabled %}
+  <script defer data-domain="{{ site.plausible.dataDomain }}" src="https://plausible.io/js/script.js"></script>
+{% endif %}
+
+  <!-- Fonts: Zilla Slab (hero title), Work Sans (headings), Geist (body and interface), IBM Plex Mono (values people copy) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=IBM+Plex+Mono&family=Work+Sans:wght@500&family=Zilla+Slab:wght@600&display=swap">
+
+  <script defer src="{{ '/assets/js/siflora.js' | relative_url }}?v={{ site.time | date:'%s' }}"></script>

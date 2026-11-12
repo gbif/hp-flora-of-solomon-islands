@@ -1,30 +1,12 @@
-# Navigation configuration
-# You should create one of these files for each language you support. E.g. /_data/es/navigation.yml for the spanish version of the menu
-# Links listed below will be included in your site's navbar (navigation at the top)
+# Main menu. Labels are free text; the widget URLs are fixed.
+# For another language, copy this file to _data/<lang>/navigation.yml and translate it.
+# To come: Species list (when the checklist exists), About, News (when the first post exists).
 
-- text: Data
-  menu: 
-  - text: Occurrences
-    href: /occurrence/search
-  - text: Datasets
-    href: /dataset/search
-  - text: Collections
-    href: /collection/search
-  - text: Literature
-    href: /literature/search
-- text: Links
-  menu: # Dropdown menu (one level deep only)
-  - text: Base theme demo
-    href: https://hp-base-theme.gbif-staging.org/
-  - text: Other sites using the theme
-    href: https://github.com/gbif/?q=hp-&type=all&language=&sort=
-  - text: "---" # Divider to separate blocks of menu items (at least 3 "-")
-  - text: "Docs" # Title for block of menu items
-  - text: Jekyll documentation
-    href: https://jekyllrb.com/docs/pages/
-  - text: Markdown tutorial
-    href: https://guides.github.com/features/mastering-markdown/
-  - text: YAML tutorial
-    href: https://dev.to/paulasantamaria/introduction-to-yaml-125f
-- text: News
-  href: /news/
+- text: Specimens
+  href: /occurrence/search
+- text: Collections  # interim target: the one holder registered in the data; follows the holder decision
+  href: /institution/0803e79c-bc17-4649-bd86-33c66bbf99ac
+- text: Dataset
+  href: /dataset/154947b6-0e29-40da-962f-a0d6e3f12a07
+- text: Living photos
+  href: /occurrence/search?basisOfRecord=HUMAN_OBSERVATION&view=gallery

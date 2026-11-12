@@ -1,0 +1,44 @@
+{% comment %}
+  NMNS footer (replaces the theme's footer.html). Copy comes from _data/footer.yml,
+  or _data/<lang>/footer.yml when a translation exists.
+  /occurrence/search fills the viewport, so it gets the 56 px organisation bar instead.
+{% endcomment %}
+{% assign footer = site.data[page.lang].footer | default: site.data.footer %}
+
+{% if page.layout == 'occurrence' %}
+<footer class="fsi-orgbar" aria-label="{{ footer.bar.label }}">
+  <div class="fsi-orgbar__inner">
+    <div class="fsi-orgbar__group">
+      <img class="fsi-orgbar__lockup" src="{{ footer.lockup.src | relative_url }}" alt="{{ footer.lockup.alt }}" width="225" height="30">
+      <span>{{ footer.bar.credit }}</span>
+    </div>
+    <div class="fsi-orgbar__group">
+      <span>{{ footer.bar.cite }}</span>
+      <span>{{ footer.poweredBy }}</span>
+    </div>
+  </div>
+</footer>
+{% else %}
+<footer class="fsi-footer">
+  <div class="fsi-wrap fsi-footer__columns">
+    <div class="fsi-footer__column fsi-footer__column--org">
+      <img class="fsi-footer__lockup" src="{{ footer.lockup.src | relative_url }}" alt="{{ footer.lockup.alt }}" width="330" height="44">
+      <p>{{ footer.lockup.description }}</p>
+    </div>
+    {% for col in footer.columns %}
+    <div class="fsi-footer__column">
+      <h2 class="fsi-footer__heading">{{ col.name }}</h2>
+      {{ col.description | markdownify }}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="fsi-wrap">
+    <div class="fsi-footer__bottom fsi-footer__rule">
+      <p>{{ footer.smallPrint }}</p>
+      <p>{{ footer.poweredBy }}</p>
+    </div>
+  </div>
+</footer>
+{% endif %}
+
+{% include footerScripts.html %}

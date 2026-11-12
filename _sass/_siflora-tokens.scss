@@ -1,0 +1,63 @@
+// Lagoon & Sand design tokens (settled 2026-11-09).
+// Imported before the theme so the Bulma overrides at the bottom take effect.
+
+// Colour
+$fsi-surface: #FFFFFF;      // page ground; every widget page
+$fsi-sand: #F6F0E2;         // alternate bands on the home page only
+$fsi-shell: #EEF1EF;        // utility button, active nav item, chips
+$fsi-rule: #D3DAD7;         // hairlines, dividers, input borders; never text
+$fsi-ink: #0B1F24;          // text, headings, 1 px outlines
+$fsi-ink-muted: #4B5C60;    // captions, labels, inactive nav
+$fsi-lagoon: #0A6577;       // the only action colour
+$fsi-lagoon-deep: #084F5D;  // hover and pressed; the one dark band
+$fsi-wash: #9FD3DC;         // decoration; links and focus ring on dark
+$fsi-tint: #E7F4F6;         // selected rows, active filter chip
+$fsi-disabled: #9AA6A3;     // disabled borders and icons only
+
+// On dark grounds (photo or lagoon-deep)
+$fsi-on-dark-muted: #CFE3E6;    // secondary text on lagoon-deep
+$fsi-on-photo-muted: #BFD3D6;   // secondary text in the hero specimen box
+$fsi-photo-tint: rgba(4, 18, 22, 0.2);
+$fsi-box-ground: rgba(7, 24, 28, 0.58);
+$fsi-text-glow: 0 1px 2px rgba(4, 18, 22, 0.55), 0 0 24px rgba(4, 18, 22, 0.45);
+
+// NMNS layer: footer and organisation bar only
+$nmns-blue: #005BAC;        // links
+$nmns-green: #006D71;       // column headings
+$nmns-text: #394050;
+$nmns-ground: #F9FAFB;
+$nmns-rule: #E5E7EA;
+$nmns-band: linear-gradient(180deg, #00857E, #005BAC);
+
+// Type
+$fsi-zh-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei";
+$fsi-font-body: "Geist", $fsi-zh-sans, system-ui, sans-serif;
+$fsi-font-heading: "Work Sans", $fsi-zh-sans, system-ui, sans-serif;
+$fsi-font-title: "Zilla Slab", "Noto Serif TC", Georgia, serif;   // home hero title only
+$fsi-font-code: "IBM Plex Mono", ui-monospace, monospace;         // values people copy
+
+// Shape and space
+$fsi-radius: 3px;           // controls, panels, widget papers
+$fsi-radius-photo: 18px;    // photographs only
+$fsi-space-section: 80px;   // between home sections
+$fsi-wrap: 1280px;
+$fsi-gutter: clamp(16px, 4vw, 40px);
+$fsi-gutter-widget: clamp(16px, 2vw, 24px);
+
+// Bulma variables (the theme builds on Bulma)
+$family-sans-serif: $fsi-font-body;
+$family-monospace: $fsi-font-code;
+$text: $fsi-ink;
+$text-strong: $fsi-ink;
+$link: $fsi-lagoon;
+$link-hover: $fsi-lagoon-deep;
+$border: $fsi-rule;
+$radius-small: $fsi-radius;
+$radius: $fsi-radius;
+$radius-large: $fsi-radius;
+$navbar-height: 4rem;
+$navbar-breakpoint: 860px;
+$navbar-item-color: $fsi-ink-muted;
+$navbar-item-hover-color: $fsi-ink;
+$navbar-item-hover-background-color: $fsi-shell;
+$navbar-item-img-max-height: 28px;

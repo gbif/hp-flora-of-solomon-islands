@@ -1,0 +1,20 @@
+// GBIF widget pages. Their look comes from the theme block in _includes/js/config.js;
+// this file only handles the page around the widget.
+
+// The theme's widget layout paints the page ground and hides the footer with an
+// inline <style>, so these selectors are one step more specific.
+body > main:has(#root.gbif) {
+  background: $fsi-shell;
+}
+
+body > footer.fsi-footer,
+body > footer.fsi-orgbar {
+  display: block;
+}
+
+// /occurrence/search fills the viewport. The widget library reads the viewport height
+// from a hidden probe element it adds to <body> (inline height: 100svh), so shortening
+// the probe by the bar's height leaves room for the 56 px organisation bar.
+body:has(> footer.fsi-orgbar) #smallViewportHeightElement {
+  height: calc(100svh - 56px) !important;
+}

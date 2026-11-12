@@ -1,0 +1,89 @@
+// Navbar: the theme's Bulma navbar, restyled. White, 1 px rule below, no shadow.
+
+.navbar {
+  background: $fsi-surface;
+  border-bottom: 1px solid $fsi-rule;
+  box-shadow: none;
+}
+
+.navbar-content {
+  max-width: $fsi-wrap;
+  margin: 0 auto;
+  padding: 0 $fsi-gutter;
+  box-sizing: border-box;
+}
+
+// Widget pages run edge to edge, so the navbar does too
+body:has(> main #root.gbif) .navbar-content {
+  max-width: none;
+  padding: 0 $fsi-gutter-widget;
+}
+
+.navbar-brand {
+  a.navbar-logo,
+  a.navbar-logo:hover,
+  a.navbar-logo:focus {
+    padding: 0;
+    background: transparent !important;
+  }
+}
+
+.navbar-logo_text {
+  padding: 0;
+  font-family: $fsi-font-heading;
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+  color: $fsi-ink;
+}
+
+.navbar-start .navbar-top-item {
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: $fsi-radius;
+  font-size: 15px;
+  font-weight: 500;
+  color: $fsi-ink-muted;
+  white-space: nowrap;
+
+  &:hover,
+  &.is-active {
+    background: $fsi-shell;
+    color: $fsi-ink;
+  }
+}
+
+.navbar-burger {
+  align-self: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid $fsi-rule;
+  border-radius: $fsi-radius;
+  color: $fsi-ink;
+
+  &:hover {
+    background: $fsi-shell;
+  }
+}
+
+@media screen and (min-width: $navbar-breakpoint) {
+  .navbar-start {
+    align-items: center;
+    gap: 2px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: $navbar-breakpoint - 1px) {
+  .navbar-menu {
+    padding: 8px 0 12px;
+    border-top: 1px solid $fsi-rule;
+    box-shadow: none;
+  }
+
+  .navbar-start .navbar-top-item {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -1,0 +1,79 @@
+{% comment %}
+  Home hero: landscape photo, title, full-text search and the specimen box
+  (rotating herbarium sheets and "Table 1. Dataset summary").
+  Copy and images come from the block's data in the page front matter.
+  Behaviour (rotation, name rule, live figures) is in assets/js/siflora.js.
+  The table carries no class: the theme rewrites every "<table" and would drop it.
+{% endcomment %}
+{% assign c = include.content %}
+{% assign box = c.box %}
+{% assign t = box.table %}
+{% assign first = box.specimens | first %}
+{% comment %} Fallback figures. The braces must stay inside tags: Liquid ends an output at the first "}". {% endcomment %}
+{% assign recordsText = t.records.text | replace: '{images}', t.records.images | replace: '{species}', t.records.species %}
+{% assign collectedText = t.collected.text | replace: '{from}', t.collected.from | replace: '{to}', t.collected.to %}
+
+<section class="fsi fsi-dark fsi-hero" aria-labelledby="fsi-hero-title">
+  <img class="fsi-hero__photo" src="{{ c.background | relative_url }}" alt="" width="1280" height="853" fetchpriority="high">
+
+  <div class="fsi-wrap fsi-hero__inner">
+    <div class="fsi-hero__text">
+      <p class="fsi-hero__pretitle">{{ c.preTitle }}</p>
+      <h1 id="fsi-hero-title" class="fsi-hero__title">{{ c.title }}</h1>
+      <p class="fsi-hero__lead">{{ c.description }}</p>
+
+      <form class="fsi-hero__search" role="search" action="{{ c.search.action | relative_url }}" method="get">
+        <label for="fsi-hero-q" class="fsi-sr">{{ c.search.label }}</label>
+        <div class="fsi-searchbox">
+          <input id="fsi-hero-q" name="q" type="search" placeholder="{{ c.search.placeholder }}" autocomplete="off">
+          <button type="submit" aria-label="{{ c.search.submit }}">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><circle cx="9.5" cy="9.5" r="6.5" stroke="currentColor" stroke-width="2"></circle><path d="M14.5 14.5L19.5 19.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+          </button>
+        </div>
+        <p class="fsi-hero__hint">{{ c.search.hint }}</p>
+      </form>
+    </div>
+
+    <aside class="fsi-specimens" aria-label="{{ box.label }}" data-fsi-specimens
+      data-label-show="{{ box.controls.show }}"
+      data-label-pause="{{ box.controls.pause }}"
+      data-label-play="{{ box.controls.play }}">
+      <div class="fsi-specimens__stage">
+        {% for s in box.specimens %}
+        <img class="fsi-specimens__slide{% if forloop.first %} is-current{% endif %}"
+          src="{{ s.image | relative_url }}" alt="{{ s.alt }}" width="900" height="506"
+          {% unless forloop.first %}aria-hidden="true"{% endunless %}
+          data-name="{{ s.name }}" data-authorship="{{ s.authorship }}" data-family="{{ s.family }}" data-id="{{ s.id }}">
+        {% endfor %}
+      </div>
+
+      <div class="fsi-specimens__bar">
+        <div class="fsi-specimens__caption" data-fsi-caption>
+          <div class="fsi-specimens__name" title="{{ first.name }} {{ first.authorship }}"><i>{{ first.name }}</i> {{ first.authorship }}</div>
+          <div class="fsi-specimens__meta">{{ first.family }}, <span class="fsi-code">{{ first.id }}</span></div>
+        </div>
+        <div class="fsi-specimens__controls" data-fsi-controls hidden></div>
+      </div>
+
+      <table data-fsi-summary>
+        <caption><b>{{ t.number }}</b> {{ t.caption }}<span data-fsi-asof>{{ t.asOf }}</span></caption>
+        <tbody>
+          <tr>
+            <th scope="row">{{ t.records.label }}</th>
+            <td data-fsi-records data-template="{{ t.records.text }}">{{ recordsText }}</td>
+          </tr>
+          <tr>
+            <th scope="row">{{ t.collected.label }}</th>
+            <td data-fsi-collected data-template="{{ t.collected.text }}">{{ collectedText }}</td>
+          </tr>
+          <tr>
+            <th scope="row">{{ t.herbaria.label }}</th>
+            <td>{{ t.herbaria.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </aside>
+  </div>
+
+  <p class="fsi-hero__credit">{{ c.credit }}</p>
+</section>

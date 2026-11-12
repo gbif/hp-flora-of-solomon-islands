@@ -1,52 +1,33 @@
-# Footer configuration
-# You should create one of these files for each language you support. E.g. /_data/es/footer.yml for the spanish version of the footer
-# Footer content is organized in columns.
-# You can also add a small print license statement at the bottom.
+# Footer copy, rendered by _includes/footer.html.
+# For another language, copy this file to _data/<lang>/footer.yml and translate it.
+# Text in [square brackets] is a placeholder that still needs sourcing.
 
-# Columns (the more you add, the narrower they will be)
+lockup:
+  src: /assets/images/nmns-lockup.svg
+  alt: 國立自然科學博物館 National Museum of Natural Science
+  description: A specimen portal of the National Museum of Natural Science, Taiwan, published through GBIF.
+
+# Columns after the lockup. Descriptions can be Markdown.
 columns:
-  - name: Column example
-    description: | # Can be Markdown and multiline as shown here. 
-      This is an example column. You can add as many as you want.
-      Each column can have a name, an optional description and optional links.
-      You can also enable social icons for a column (e.g. for a "Contact" column).
-    links:
-    - text: Name of project partner 1
-      href: http://example.com
-    - text: Name of project partner 2
-      href: http://example.com
+  - name: Partners  # wording to confirm with NMNS
+    description: >-
+      Ministry of Forestry and Honiara Botanical Gardens, Solomon Islands;
+      TaiwanICDF, NMNS, TFRI, NTHU and Koo Botanical Conservation Center, Taiwan;
+      Makino Botanical Garden, Japan
 
-  - name: Code
-    description: | # Can be Markdown
-      See `_data/footer.yml` to customize the footer.
-  
+  - name: How to cite
+    description: >-
+      Cite the dataset as shown on its [dataset page](/dataset/154947b6-0e29-40da-962f-a0d6e3f12a07),
+      DOI <a class="fsi-code" href="https://doi.org/10.15468/9u37bm">10.15468/9u37bm</a>.
+
   - name: Contact
-    description: | # Can be Markdown
-      Social icons links defined in `_config.yml`
-      * Street name
-      * 1234 postal code
-      * Country
-    connectIcons: true # Show social icons (defined in _config.yml)
+    description: "[Contact email]"
 
+smallPrint: "© National Museum of Natural Science. [Licence statement]"
+poweredBy: 'Powered by <a href="https://www.gbif.org/hosted-portals">GBIF</a>'
 
-  # EXAMPLE - just leave this commented out at the bottom of the file for future reference
-  # You can add as many columns as you want
-
-  #columns:
-  #- name: Group name
-  #  description: |
-  #    An optional description. Can be markdown
-  #  links: # optional as well
-  #  - text: link title
-  #    href: http://example.com
-  #  - text: link title 2
-  #    href: http://example2.com
-  #  connectIcons: true # optional - show social icons (defined in _config.yml)
-
-
-# Below is configuration for a small print license statement to add at the bottom of the footer. Can be Markdown
-# Will be prefixed by "© {{ site.author }}" if defined in _config.yml
-# Will be postfixed by "Powered by GBIF"
-# (Disabled by default, remove the '#' lines on the following two lines to enable.)
-#license: >
-#  Content on this site is licensed under an [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/).
+# The 56 px organisation bar shown on /occurrence/search instead of the full footer
+bar:
+  label: Organisation
+  credit: Specimen data of the National Museum of Natural Science, published through GBIF
+  cite: 'Cite: <a class="fsi-code" href="https://doi.org/10.15468/9u37bm">10.15468/9u37bm</a>'

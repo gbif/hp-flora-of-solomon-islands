@@ -1,0 +1,12 @@
+{% comment %} Home: "The collection at a glance". A sand band around the theme's dashboard block. {% endcomment %}
+{% assign c = include.content %}
+
+<section class="fsi fsi-section fsi-section--sand fsi-glance" aria-labelledby="fsi-glance-title">
+  <div class="fsi-wrap fsi-section__inner">
+    <div class="fsi-section__head">
+      <h2 id="fsi-glance-title">{{ c.title }}</h2>
+      {{ c.description | markdownify }}
+    </div>
+    {% include blocks/dashboard.html content=c.dashboard %}
+  </div>
+</section>

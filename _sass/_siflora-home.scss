@@ -1,0 +1,569 @@
+// Home page (design spec, section 6): hero, then bands at 80 px rhythm.
+
+// ---------- Hero ----------
+
+.fsi-hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: 720px;
+  background: $fsi-ink;
+  color: #fff;
+
+  // 20% lagoon-ink tint over the photograph
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: $fsi-photo-tint;
+  }
+
+  &__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 55%;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px 64px;
+    padding-top: 72px;
+    padding-bottom: 88px;
+  }
+
+  &__text {
+    flex: 1 1 520px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    text-shadow: $fsi-text-glow;
+  }
+
+  &__pretitle {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  h1.fsi-hero__title {
+    max-width: 11em;
+    font-family: $fsi-font-title;
+    font-weight: 600;
+    font-size: unquote("min(70px, 11vw)"); // unquote: keeps Sass from evaluating min()
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  &__lead {
+    max-width: 52ch;
+    font-size: 19px;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  &__search {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 450px;
+    padding-top: 8px;
+  }
+
+  &__hint {
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+
+  &__credit {
+    position: absolute;
+    z-index: 2;
+    left: $fsi-gutter;
+    bottom: 16px;
+    max-width: calc(100% - 32px);
+    font-size: 12px;
+    line-height: 1.4;
+    text-shadow: $fsi-text-glow;
+  }
+}
+
+// Search field: 30% white fill at rest; on focus the fill drops and a 2 px white edge appears.
+.fsi-searchbox {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  border-radius: $fsi-radius;
+  background: rgba(255, 255, 255, 0.3);
+
+  input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0 0 0 18px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    appearance: none;
+    font-family: $fsi-font-body;
+    font-size: 17px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(4, 18, 22, 0.55);
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.9);
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    // The browser's own clear button is blue and sits off-palette on the photo
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
+  }
+
+  button {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 0;
+    border-radius: 0 $fsi-radius $fsi-radius 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  &:focus-within {
+    background: transparent;
+    box-shadow: inset 0 0 0 2px #fff;
+  }
+}
+
+// Specimen box: rotating sheet, one-line caption, Table 1
+.fsi-specimens {
+  flex: 0 1 450px;
+  width: 450px;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: $fsi-radius;
+  background: $fsi-box-ground;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  color: #fff;
+
+  &__stage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #F4F2EC;
+  }
+
+  &__slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 700ms ease;
+
+    &.is-current {
+      opacity: 1;
+    }
+  }
+
+  &__bar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 20px 0;
+  }
+
+  &__caption {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    height: 40px;
+  }
+
+  &__name,
+  &__meta {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__name {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  &__meta {
+    font-size: 13px;
+    line-height: 18px;
+    color: $fsi-on-photo-muted;
+
+    .fsi-code {
+      font-size: 12px;
+    }
+  }
+
+  &__controls {
+    flex: none;
+    display: flex;
+    align-items: center;
+
+    &[hidden] {
+      display: none;
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 32px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  &__dot span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+  }
+
+  &__dot[aria-pressed="true"] span {
+    background: #fff;
+  }
+
+  &__controls &__toggle {
+    width: 32px;
+    margin-left: 4px;
+  }
+
+  // "Table 1. Dataset summary": set like a journal table. Rules above and below only.
+  table {
+    width: calc(100% - 40px);
+    margin: 16px 20px 22px;
+    border-collapse: collapse;
+    border-top: 1.5px solid #fff;
+    border-bottom: 1.5px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  table caption {
+    caption-side: top;
+    padding-bottom: 8px;
+    text-align: left;
+    font-size: 13px;
+    color: $fsi-on-photo-muted;
+
+    b {
+      font-weight: 500;
+      color: #fff;
+    }
+  }
+
+  table th,
+  table td {
+    padding: 5px 0;
+    border: 0;
+    text-align: left;
+    vertical-align: top;
+    color: #fff;
+  }
+
+  table th {
+    width: 100px;
+    padding-right: 12px;
+    font-weight: 400;
+    color: $fsi-on-photo-muted;
+  }
+
+  table tr:first-child th,
+  table tr:first-child td {
+    padding-top: 9px;
+  }
+
+  table tr:last-child th,
+  table tr:last-child td {
+    padding-bottom: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fsi-specimens__slide {
+    transition: none;
+  }
+}
+
+// ---------- Bands ----------
+
+.fsi-section {
+  background: $fsi-surface;
+  color: $fsi-ink;
+
+  &--sand {
+    background: $fsi-sand;
+  }
+
+  &--deep {
+    background: $fsi-lagoon-deep;
+    color: #fff;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding-top: $fsi-space-section;
+    padding-bottom: $fsi-space-section;
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 720px;
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: $fsi-ink-muted;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Photographs are the only thing with 18 px corners
+.fsi-photo {
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border-radius: $fsi-radius-photo;
+  background: $fsi-ink;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// The collection at a glance: the theme's dashboard block on sand
+.fsi-glance .dashboard {
+  .dashboard-content {
+    max-width: none;
+  }
+
+  .dashboard-content .gbif-dashboardLayout {
+    padding: 0;
+  }
+
+  // Chart papers: white, 1 px rule, 3 px corners, flat. The widget theme does not
+  // reach these three, so they are set on the widget's card class.
+  .g-bg-card {
+    border-color: $fsi-rule;
+    border-radius: $fsi-radius;
+    box-shadow: none;
+  }
+}
+
+// About the collection
+.fsi-about {
+  &__inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 56px;
+  }
+
+  &__text,
+  &__figure {
+    flex: 1 1 420px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__text {
+    gap: 16px;
+
+    p {
+      max-width: 62ch;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+  }
+
+  &__text &__placeholder {
+    color: $fsi-ink-muted;
+  }
+
+  &__figure {
+    gap: 10px;
+    margin: 0;
+
+    figcaption {
+      font-size: 13px;
+      line-height: 1.45;
+      color: $fsi-ink-muted;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+// From the field
+.fsi-field {
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 16px;
+
+    h2 {
+      color: #fff;
+    }
+  }
+
+  &__all {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  a {
+    color: $fsi-wash;
+    text-decoration: underline;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  a.fsi-field__card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover .fsi-field__name {
+      text-decoration: underline;
+    }
+  }
+
+  &__name {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  &__place,
+  &__credit {
+    line-height: 1.45;
+    color: $fsi-on-dark-muted;
+  }
+
+  &__place {
+    font-size: 14px;
+  }
+
+  &__credit {
+    font-size: 13px;
+  }
+}
+
+// Ways to explore
+.fsi-explore__inner {
+  gap: 24px;
+}
+
+.fsi-paths {
+  border-top: 1px solid $fsi-ink;
+
+  a {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid $fsi-rule;
+    color: $fsi-ink;
+  }
+
+  &__title {
+    flex: 0 0 320px;
+    max-width: 100%;
+    font-family: $fsi-font-heading;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: $fsi-lagoon;
+  }
+
+  &__text {
+    flex: 1 1 360px;
+    max-width: 62ch;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  a:hover &__title {
+    color: $fsi-lagoon-deep;
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,128 @@
+// Base type, links and focus for the designed pages (home, page layouts, navbar, footer).
+// GBIF widgets (.gbif) take their look from the theme block in _includes/js/config.js.
+
+:root {
+  --fsi-surface: #{$fsi-surface};
+  --fsi-sand: #{$fsi-sand};
+  --fsi-shell: #{$fsi-shell};
+  --fsi-rule: #{$fsi-rule};
+  --fsi-ink: #{$fsi-ink};
+  --fsi-ink-muted: #{$fsi-ink-muted};
+  --fsi-lagoon: #{$fsi-lagoon};
+  --fsi-lagoon-deep: #{$fsi-lagoon-deep};
+  --fsi-wash: #{$fsi-wash};
+  --fsi-tint: #{$fsi-tint};
+  --fsi-disabled: #{$fsi-disabled};
+}
+
+body {
+  background: $fsi-surface;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Type scale (design spec, section 3)
+@mixin fsi-heading($size, $line, $tracking) {
+  font-family: $fsi-font-heading;
+  font-weight: 500;
+  font-size: $size;
+  line-height: $line;
+  letter-spacing: $tracking;
+  color: $fsi-ink;
+}
+
+.fsi,
+.content {
+  h1 { @include fsi-heading(40px, 1.1, -0.03em); }
+  h2 { @include fsi-heading(33px, 1.15, -0.025em); }
+  h3 { @include fsi-heading(28px, 1.2, -0.02em); }
+  h4 { @include fsi-heading(23px, 1.25, -0.01em); }
+}
+
+.content a {
+  text-decoration: underline;
+}
+
+// Values people copy: catalogue numbers, coordinates, DOIs
+.fsi-code {
+  font-family: $fsi-font-code;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+}
+
+.fsi-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Page container for the designed sections
+.fsi-wrap {
+  width: 100%;
+  max-width: $fsi-wrap;
+  margin: 0 auto;
+  padding-left: $fsi-gutter;
+  padding-right: $fsi-gutter;
+  box-sizing: border-box;
+}
+
+// Focus: 3 px lagoon outline, 2 px offset; wash on dark grounds
+.navbar,
+.fsi,
+.content,
+body > footer {
+  a,
+  button,
+  input,
+  [tabindex] {
+    &:focus-visible {
+      outline: 3px solid $fsi-lagoon;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.fsi-dark {
+  a,
+  button,
+  input,
+  [tabindex] {
+    &:focus-visible {
+      outline-color: $fsi-wash;
+    }
+  }
+}
+
+// Traditional Chinese (pages arrive later): looser lines, no tracking, no italic
+// except scientific names, which stay italic in the Latin face.
+:lang(zh) {
+  letter-spacing: 0;
+
+  body,
+  .content {
+    line-height: 1.75;
+  }
+
+  .fsi,
+  .content {
+    h1 { line-height: 1.3; letter-spacing: 0; }
+    h2,
+    h3 { line-height: 1.35; letter-spacing: 0; }
+    h4 { line-height: 1.4; letter-spacing: 0; }
+  }
+
+  em,
+  i {
+    font-style: normal;
+  }
+
+  .fsi-sci,
+  [lang="la"] {
+    font-style: italic;
+  }
+}

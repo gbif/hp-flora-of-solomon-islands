@@ -1,0 +1,131 @@
+// NMNS footer and organisation bar. The only place NMNS colours and the lockup appear.
+
+.fsi-footer,
+.fsi-orgbar {
+  background: $nmns-ground;
+  color: $nmns-text;
+
+  &::before {
+    content: "";
+    display: block;
+    background: $nmns-band;
+  }
+
+  a {
+    color: $nmns-blue;
+    text-decoration: underline;
+
+    &:hover {
+      color: $nmns-blue;
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  .fsi-code {
+    font-size: 13px;
+  }
+}
+
+.fsi-footer {
+  &::before {
+    height: 6px;
+  }
+
+  &__columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px 40px;
+    padding-top: 48px;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__column--org {
+    gap: 16px;
+  }
+
+  &__lockup {
+    display: block;
+    width: 100%;
+    max-width: 330px;
+    height: auto;
+  }
+
+  &__heading {
+    margin: 0;
+    font-family: $fsi-font-heading;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.4;
+    color: $nmns-green;
+  }
+
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 16px;
+    padding-bottom: 24px;
+    font-size: 13px;
+    line-height: 1.4;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__rule {
+    border-top: 1px solid $nmns-rule;
+  }
+}
+
+// 56 px bar for /occurrence/search, where the search fills the viewport
+.fsi-orgbar {
+  border-top: 1px solid $nmns-rule;
+
+  &::before {
+    height: 3px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 24px;
+    min-height: 52px;
+    padding: 6px $fsi-gutter-widget;
+    box-sizing: border-box;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  &__group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 20px;
+  }
+
+  &__lockup {
+    display: block;
+    width: auto;
+    height: 30px;
+  }
+
+  .fsi-code {
+    font-size: 12px;
+  }
+}

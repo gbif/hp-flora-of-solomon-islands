@@ -1,0 +1,23 @@
+{% comment %} Home: "From the field". The one dark band: living photos with name, island and month. {% endcomment %}
+{% assign c = include.content %}
+
+<section class="fsi fsi-dark fsi-section fsi-section--deep fsi-field" aria-labelledby="fsi-field-title">
+  <div class="fsi-wrap fsi-section__inner">
+    <div class="fsi-field__head">
+      <h2 id="fsi-field-title">{{ c.title }}</h2>
+      <a class="fsi-field__all" href="{{ c.all.href | relative_url }}">{{ c.all.text }}</a>
+    </div>
+    <ul class="fsi-field__grid">
+      {% for p in c.photos %}
+      <li>
+        <a class="fsi-field__card" href="{{ p.href | relative_url }}">
+          <div class="fsi-photo"><img src="{{ p.image | relative_url }}" alt="{{ p.alt }}" width="1200" height="800" loading="lazy"></div>
+          <div class="fsi-field__name">{{ p.name }}</div>
+          <div class="fsi-field__place">{{ p.place }}</div>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="fsi-field__credit">{{ c.credit }}</p>
+  </div>
+</section>

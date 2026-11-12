@@ -1,0 +1,18 @@
+{% comment %} Home: "Ways to explore". A ruled list of paths into the data; no cards, numbers or arrows. {% endcomment %}
+{% assign c = include.content %}
+
+<section class="fsi fsi-section fsi-explore" aria-labelledby="fsi-explore-title">
+  <div class="fsi-wrap fsi-section__inner fsi-explore__inner">
+    <h2 id="fsi-explore-title">{{ c.title }}</h2>
+    <ul class="fsi-paths">
+      {% for p in c.paths %}
+      <li>
+        <a href="{{ p.href | relative_url }}">
+          <span class="fsi-paths__title">{{ p.title }}</span>
+          <span class="fsi-paths__text">{{ p.description }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>

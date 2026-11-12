@@ -1,5 +1,8 @@
-// $navbar-dropdown-arrow: #f00;
+@import "_siflora-tokens";   // first: sets the Bulma variables the theme reads
 @import "theme/_main";
 
-// You can add additional styling here
-@import "_example"; // either as inline css or as a separate file as in this case
+@import "_siflora-base";
+@import "_siflora-navbar";
+@import "_siflora-footer";
+@import "_siflora-home";
+@import "_siflora-widgets";
