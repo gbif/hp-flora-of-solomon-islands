@@ -1,0 +1,592 @@
+// Publications: /publications and the post pages (design spec section 12).
+// White ground, no sand bands. Content items use flat content cards (12.2).
+
+// Card title (19 px) and the colours of the one non-palette value
+$fsi-card-title-size: 19px;
+$fsi-pptx-orange: #C43E1C;   // PPTX icon label band only; set inline in the SVG
+
+@mixin fsi-card-title($size: $fsi-card-title-size) {
+  font-family: $fsi-font-heading;
+  font-weight: 500;
+  font-size: $size;
+  line-height: if($size > 20px, 1.25, 1.3);
+  letter-spacing: -0.01em;
+  color: $fsi-ink;
+  text-wrap: pretty;
+}
+
+// ---------- Listing: sections ----------
+
+.fsi.fsi-pub-header {
+  padding: 56px 0 48px;
+
+  .fsi-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  // h1 set at the h2 size, as "The collection at a glance"
+  h1 {
+    @include fsi-heading(33px, 1.15, -0.025em);
+  }
+
+  p {
+    max-width: 62ch;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $fsi-ink-muted;
+  }
+}
+
+.fsi-pub-section {
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 48px 0;
+    border-top: 1px solid $fsi-rule;
+  }
+
+  &--lead &__inner {
+    border-top-color: $fsi-ink;
+  }
+
+  &:last-of-type &__inner {
+    padding-bottom: 80px;
+  }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    p {
+      max-width: 62ch;
+      font-size: 16px;
+      line-height: 1.5;
+      color: $fsi-ink-muted;
+    }
+  }
+}
+
+// ---------- Featured article ----------
+
+.fsi-featured {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 920px;
+
+  &__label {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: $fsi-ink-muted;
+  }
+
+  .fsi-featured__title {
+    @include fsi-heading(40px, 1.1, -0.03em);
+    text-wrap: balance;
+  }
+
+  &__byline {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  &__date {
+    color: $fsi-ink-muted;
+  }
+
+  // Text wraps round the floated photo
+  &__body {
+    display: flow-root;
+    padding-top: 8px;
+
+    p {
+      margin: 0 0 16px;
+      font-size: 16px;
+      line-height: 1.5;
+      text-wrap: pretty;
+    }
+  }
+
+  &__figure {
+    float: right;
+    width: 400px;
+    margin: 4px 0 16px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    figcaption {
+      font-size: 13px;
+      line-height: 1.45;
+      color: $fsi-ink-muted;
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .fsi-featured__more {
+    margin: 0;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .fsi-featured__figure {
+    float: none;
+    width: 100%;
+    margin: 0 0 20px;
+  }
+}
+
+// ---------- Content cards (12.2) ----------
+
+.fsi-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+
+  > li {
+    display: flex;
+    min-width: 0;
+  }
+
+  &--posts {
+    grid-template-columns: repeat(auto-fill, minmax(unquote("min(100%, 280px)"), 360px));
+    justify-content: start;
+  }
+
+  &--papers {
+    grid-template-columns: repeat(auto-fit, minmax(unquote("min(100%, 440px)"), 1fr));
+  }
+
+  &--books {
+    grid-template-columns: repeat(auto-fit, minmax(unquote("min(100%, 480px)"), 1fr));
+  }
+
+  &--media {
+    grid-template-columns: repeat(auto-fill, minmax(unquote("min(100%, 480px)"), 600px));
+    justify-content: start;
+  }
+}
+
+.fsi-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 24px;
+  box-sizing: border-box;
+  background: $fsi-surface;
+  border: 1px solid $fsi-rule;
+  border-radius: $fsi-radius;
+  color: $fsi-ink;
+
+  .fsi-card__title {
+    @include fsi-card-title;
+  }
+
+  &__meta {
+    font-size: 14px;
+    line-height: 1.45;
+    color: $fsi-ink-muted;
+  }
+
+  // Whole-card link: lagoon border and an underlined lagoon-deep title on hover
+  &--link {
+    gap: 8px;
+    min-height: 132px;
+    padding: 20px 24px;
+    text-decoration: none;
+
+    .fsi-card__meta {
+      margin-top: auto;
+    }
+
+    &:hover {
+      border-color: $fsi-lagoon;
+      color: $fsi-ink;
+
+      .fsi-card__title {
+        color: $fsi-lagoon-deep;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Content still to come
+  &--placeholder {
+    border: 1px dashed $fsi-ink-muted;
+
+    .fsi-card__title {
+      color: $fsi-ink-muted;
+    }
+  }
+}
+
+// Research articles
+.fsi-paper {
+  &__source {
+    font-size: 13px;
+    line-height: 1.4;
+    color: $fsi-ink-muted;
+  }
+
+  &__abstract {
+    font-size: 15px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__doi {
+    margin-top: auto;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    max-width: 100%;
+    font-family: $fsi-font-code;
+    font-size: 13px;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+  }
+}
+
+// Books
+.fsi-book {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  &__cover {
+    flex: none;
+    display: block;
+    width: 140px;
+    height: auto;
+    align-self: flex-start;
+    box-sizing: border-box;
+    border: 1px solid $fsi-rule;
+    border-radius: $fsi-radius;   // a cover is an object, not a photograph
+  }
+
+  &__text {
+    flex: 1 1 220px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .fsi-book__title {
+    @include fsi-card-title(23px);
+  }
+
+  &__published {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+
+  &__isbn {
+    font-size: 13px;
+    color: $fsi-ink-muted;
+
+    .fsi-code {
+      color: $fsi-ink;
+    }
+  }
+
+  &__link {
+    margin-top: auto;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+}
+
+.fsi-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border-radius: $fsi-radius;
+  background: $fsi-shell;
+  font-size: 13px;
+  color: $fsi-ink;
+}
+
+// Media
+.fsi-media {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 20px;
+  padding: 20px 24px;
+
+  &__icon {
+    flex: none;
+  }
+
+  &__text {
+    flex: 1 1 240px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__lang {
+    font-family: $fsi-font-body;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0;
+    color: $fsi-ink-muted;
+  }
+}
+
+// Secondary button: ink outline on white
+.fsi-button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border-radius: $fsi-radius;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+
+  &--secondary {
+    border: 1px solid $fsi-ink;
+    background: $fsi-surface;
+    color: $fsi-ink;
+
+    &:hover {
+      background: $fsi-shell;
+      color: $fsi-ink;
+    }
+  }
+}
+
+// ---------- Post page (12.3) ----------
+
+.fsi-post {
+  &__wrap {
+    padding: 0 $fsi-gutter 80px;
+  }
+
+  &__article {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 40px 0 32px;
+    border-bottom: 1px solid $fsi-ink;
+
+    h1 {
+      text-wrap: balance;
+    }
+  }
+
+  &__crumb {
+    font-size: 14px;
+    line-height: 1.45;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      text-decoration: underline;
+    }
+  }
+
+  &__byline {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  &__muted {
+    color: $fsi-ink-muted;
+  }
+
+  // Abstract as the standfirst
+  &__abstract {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 32px 0;
+    border-bottom: 1px solid $fsi-rule;
+
+    h2 {
+      @include fsi-heading(15px, 1.4, 0);
+      color: $fsi-ink-muted;
+    }
+
+    p {
+      font-size: 19px;
+      line-height: 1.45;
+      text-wrap: pretty;
+    }
+  }
+
+  // More posts
+  &__more {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 80px auto 0;
+    padding-top: 32px;
+    border-top: 1px solid $fsi-ink;
+  }
+
+  &__more-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 16px;
+
+    h2 {
+      @include fsi-heading(23px, 1.25, -0.01em);
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+  }
+}
+
+.fsi-prose {
+  display: flow-root;
+  padding-top: 32px;
+
+  p {
+    margin: 0 0 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-wrap: pretty;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+// Figures: 2/3 of the column, one third of the figure outside the column edge,
+// alternating right, left, right. Inside the column below 1000 px; full width below 640 px.
+.fsi-fig {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 66.667%;
+
+  &--right {
+    float: right;
+    margin: 4px -22.222% 16px 24px;
+  }
+
+  &--left {
+    float: left;
+    margin: 4px 24px 16px -22.222%;
+  }
+
+  &__sheet {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    border: 1px solid $fsi-rule;
+    border-radius: $fsi-radius;
+  }
+
+  figcaption {
+    font-size: 13px;
+    line-height: 1.45;
+    color: $fsi-ink-muted;
+
+    b {
+      font-weight: 500;
+      color: $fsi-ink;
+    }
+
+    .fsi-code {
+      font-size: 12px;
+      color: $fsi-ink;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .fsi-fig--right {
+    margin-right: 0;
+  }
+
+  .fsi-fig--left {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .fsi-fig--right,
+  .fsi-fig--left {
+    float: none;
+    width: 100%;
+    margin: 8px 0 24px;
+  }
+}

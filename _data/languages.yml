@@ -1,31 +1,10 @@
-# The translations on this page is machine generated and need a review
+# Languages the site is set up for. English only for now; Traditional Chinese (Taiwan usage)
+# comes later as zh-tw/ with matching lang-ref. The template's other languages are removed.
+# The dashboard block reads this list; the widget pages take theirs from _includes/js/config.js.
+# No language link is drawn while the site is English only: see _includes/navbarLanguageItem.html.
 en:
   label: English
   archive_permalink: /post/
-da:
-  label: Dansk
-  archive_permalink: /da/post/
-es:
-  label: Español
-  archive_permalink: /es/post/
-it:
-  label: Italiano
-  archive_permalink: /it/post/
-ru:
-  label: Русский
-  archive_permalink: /ru/post/
-ar:
-  label: العربية
-  archive_permalink: /ar/post/
-fr:
-  label: Français
-  archive_permalink: /fr/post/
-zh:
-  label: 中文
-  archive_permalink: /zh/post/
 zh-tw:
   label: 繁體中文
   archive_permalink: /zh-tw/post/
-ja:
-  label: 日本語
-  archive_permalink: /ja/post/

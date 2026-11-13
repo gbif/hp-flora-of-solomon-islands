@@ -15,6 +15,7 @@
   // The theme only marks dropdown items, so the top-level items are matched here.
   // A link matches when its path is the current path and all of its query
   // parameters are in the current URL; the most specific match wins.
+  // With no match, a section link that the current path sits under is marked instead.
   function markCurrentNavItem() {
     var here = new URL(window.location.href);
     var best = null;
@@ -41,6 +42,20 @@
     if (best) {
       best.classList.add('is-active');
       best.setAttribute('aria-current', 'page');
+      return;
+    }
+    // A section link (path ending in "/", no query, such as /publications/) is also
+    // current on the pages below it, such as a post at /publications/<slug>/.
+    items.forEach(function (a) {
+      if (best) return;
+      var link = new URL(a.href, here);
+      if (link.origin !== here.origin || link.search) return;
+      if (!/\/$/.test(link.pathname) || link.pathname === '/') return;
+      if (here.pathname.indexOf(link.pathname) === 0) best = a;
+    });
+    if (best) {
+      best.classList.add('is-active');
+      best.setAttribute('aria-current', 'true');
     }
   }
 

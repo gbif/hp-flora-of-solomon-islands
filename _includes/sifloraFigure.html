@@ -1,0 +1,9 @@
+{%- comment -%}
+  A floated figure in a post (design spec 12.3), from the post's `figures` front matter.
+  Usage in the post text, on a line of its own: {% include sifloraFigure.html n=1 %}
+  side: right | left. kind: photo (3:2, 18 px corners) | sheet (own aspect, 1 px rule, 3 px corners).
+  Output stays on one line so Markdown treats it as one HTML block.
+{%- endcomment -%}
+{%- assign i = include.n | minus: 1 -%}
+{%- assign f = page.figures[i] -%}
+<figure class="fsi-fig fsi-fig--{{ f.side | default: 'right' }} fsi-fig--{{ f.kind | default: 'photo' }}">{% if f.kind == 'sheet' %}<img class="fsi-fig__sheet" src="{{ f.src | relative_url }}" alt="{{ f.alt | escape }}" width="{{ f.width }}" height="{{ f.height }}" loading="lazy">{% else %}<div class="fsi-photo"><img src="{{ f.src | relative_url }}" alt="{{ f.alt | escape }}" width="{{ f.width }}" height="{{ f.height }}" loading="lazy"></div>{% endif %}<figcaption><b>Figure {{ include.n }}.</b> {{ f.caption | strip_newlines }}</figcaption></figure>

@@ -1,0 +1,134 @@
+# /publications and the post pages (design spec section 12).
+# Read by the blocks in _includes/blocks/siflora{PubHeader,Featured,Posts,Papers,Books,Media}.html
+# and by _layouts/article.html. For another language, copy to _data/<lang>/publications.yml.
+# Titles and abstracts keep scientific names in <i>…</i>.
+# Text in [square brackets] is a placeholder that still needs sourcing.
+
+title: Publications
+intro: >-
+  Articles, research papers, books and slides from the Solomon Islands Resource Plant
+  Survey and Flora Compilation Project.
+
+featured:
+  label: Featured article
+  post: biodiversity-of-the-pacific-islands   # file name in _articles/, without .md
+  image: /assets/images/publications/living-sitw03067-ccwi-001.jpg
+  image_alt: Rosette of fronds of the filmy fern Cephalomanes atrovirens on the forest floor
+  # Same photo as GBIF occurrence 6182179836 (CC BY 4.0, creator Cheng-Wei CHEN).
+  caption: >-
+    <i>Cephalomanes atrovirens</i> C. Presl. on Ranongga Island, Western Province,
+    16 August 2013. Photo by Cheng-Wei Chen.
+    <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+  read_more: Read the full article…
+
+posts:
+  title: Posts
+  intro: Stories from the project, translated from Traditional Chinese.
+  # Cards come from the _articles collection (title and author), newest first,
+  # leaving out the featured article.
+
+# Wording on the post pages (_layouts/article.html)
+post_page:
+  breadcrumb: Publications
+  abstract: Abstract
+  translated: Translated by Claude Opus.
+  read_time: "{n}-minute read."   # n = body words ÷ 220, rounded up
+  more: More posts
+  all: All publications
+
+papers_title: Research articles
+papers_intro: Peer-reviewed papers from the project. Each DOI opens the article on the journal's site.
+papers:   # newest first
+  - title: A revision of <i>Begonia</i> (Begoniaceae) in the Solomon Islands, including four new species
+    authors: C.-W. Lin, T.-C. Hsu, T.-Y. A. Yang et al.
+    journal: Taiwania
+    citation: "66(4): 478–495"
+    year: 2021
+    doi: 10.6165/tai.2021.66.478
+    abstract: >-
+      The Solomon Islands in Melanesian region of South Pacific lie in an equatorial climate and
+      harbour diverse habitats covered by forests. Based on field surveys and specimens examination,
+      six <i>Begonia</i> species were confirmed from the Solomon Islands, and a key of the species is
+      provided for identification. [Rest of the abstract from the journal page]
+  - title: >-
+      <i>Gastrodia isabelensis</i> and <i>G. solomonensis</i> (Gastrodieae, Epidendroideae, Orchidaceae):
+      two new species representing a new generic record in the Solomon Islands
+    authors: T.-C. Hsu, M. Fanerii, T.-Y. A. Yang et al.
+    journal: Phytotaxa
+    citation: "270(2): 137–145"
+    year: 2016
+    doi: 10.11646/phytotaxa.270.2.6
+    abstract: >-
+      Two new mycoheterotrophic orchids, <i>Gastrodia isabelensis</i> and <i>G. solomonensis</i>, are
+      described and illustrated from the Solomon Islands. The genus <i>Gastrodia</i> is also recorded
+      in the country for the first time. [Rest of the abstract from the journal page]
+  - title: New Records and Name Changes for the Orchids in the Solomon Islands
+    authors: T.-C. Hsu, T.-Y. A. Yang, F. Pitisopa et al.
+    journal: Taiwania
+    citation: "61(1): 21–26"
+    year: 2016
+    doi: 10.6165/tai.2016.61.21
+    abstract: >-
+      One genus (<i>Anoectochilus</i>) and 12 species (<i>Agrostophyllum neoguineense</i>,
+      <i>Anoectochilus papuanus</i>, <i>Arundina graminifolia</i>, <i>Bulbophyllum aemulum</i>,
+      <i>B. bisepalum</i>, <i>B. nubigenum</i>, <i>B. ochroleucum</i>, <i>B. phreatiopse</i>,
+      <i>Corybas solomonensis</i>, <i>Crepidium laevis</i>, <i>Didymoplexis striata</i>,
+      <i>Epipogium roseum</i>) of orchids (Orchidaceae) are first recorded to the flora of the
+      Solomon Islands during the 2012–2015 field expeditions. Geographic data, ecological and
+      taxonomic notes and illustrations of those species are provided. A new combination
+      (<i>Pinalia oligotricha</i>) and a new name (<i>Dendrobium bougainvilleanum</i>) are also
+      proposed for fitting recent systematic alterations within Orchidaceae.
+  - title: >-
+      <i>Antrophyum solomonense</i> (Pteridaceae), a New Species from the Solomon Islands, and Its
+      Systematic Position Based on Phylogenetic Analysis
+    authors: C.-W. Chen, J. H. Nitta, M. Fanerii et al.
+    journal: Systematic Botany
+    citation: "40(3): 645–651"
+    year: 2015
+    doi: 10.1600/036364415X689357
+    abstract: >-
+      [Full abstract from the journal page. It opens: "A vittarioid fern from the Solomon Islands,
+      which has long been treated as Antrophyum semicostatum, is described here as a new …"]
+
+books_title: Books
+books_intro: Published by the National Museum of Natural Science.
+books:
+  - title: Field Guide to the Plants of Solomon Islands
+    people: Edited by W.-L. Chiou, J.-M. Hu, C.-H. Chen et al.
+    published: National Museum of Natural Science, July 2016
+    language: English and Traditional Chinese
+    isbn: 978-986-04-9038-1
+    cover: /assets/images/publications/cover-field-guide-2016.jpg
+    cover_width: 635
+    cover_height: 900
+    cover_alt: "Cover of Field Guide to the Plants of Solomon Islands: a river through mossy montane forest"
+    link: https://www.kbcc.org.tw/tw/announce_newsArticle.html?id=270
+    link_text: About the book on the KBCC site (in Traditional Chinese)   # the page is served as lang="zh-TW"
+    hreflang: zh-Hant-TW
+  - title: "Sol Amazing: Lycophytes & Ferns of the Solomon Islands"
+    people: C.-W. Chen, L. Perrie, D. Glenny, W.-L. Chiou
+    published: National Museum of Natural Science, July 2017 · 550 pp.
+    language: English
+    isbn: 978-986-05-2972-2
+    cover: /assets/images/publications/cover-sol-amazing-2017.jpg
+    cover_width: 644
+    cover_height: 900
+    cover_alt: "Cover of Sol Amazing: a fern drawn beside a carved Nguzu Nguzu figure on black"
+    link: https://www.researchgate.net/publication/320109996_Sol_Amazing_Lycophytes_ferns_of_the_Solomon_Islands
+    link_text: View on ResearchGate
+
+media_title: Media
+media_intro: Presentation slides about the project.
+media_download: Download
+media:
+  - title: "The Solomon Islands project: full presentation"
+    language_note: (in Traditional Chinese)
+    language_name: in Traditional Chinese   # read out in the button's accessible name
+    hreflang: zh-Hant-TW
+    format: PowerPoint
+    type: application/vnd.openxmlformats-officedocument.presentationml.presentation
+    date: 2021-11-16
+    size: 191.3 MB
+    # Not in the repo: 191.3 MB is over GitHub's 100 MB per-file limit. Host it outside
+    # (Zenodo, which also gives a DOI, or an NMNS server) and put the URL here.
+    url: "[Slides URL]"

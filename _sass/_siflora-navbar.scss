@@ -13,12 +13,6 @@
   box-sizing: border-box;
 }
 
-// Widget pages run edge to edge, so the navbar does too
-body:has(> main #root.gbif) .navbar-content {
-  max-width: none;
-  padding: 0 $fsi-gutter-widget;
-}
-
 .navbar-brand {
   a.navbar-logo,
   a.navbar-logo:hover,
@@ -51,6 +45,13 @@ body:has(> main #root.gbif) .navbar-content {
     background: $fsi-shell;
     color: $fsi-ink;
   }
+}
+
+// Bulma clears the active item's background at desktop width with
+// `a.navbar-item.is-active:not(:focus):not(:hover)`; match its weight so the shell fill shows.
+.navbar .navbar-start a.navbar-top-item.is-active {
+  background: $fsi-shell;
+  color: $fsi-ink;
 }
 
 .navbar-burger {

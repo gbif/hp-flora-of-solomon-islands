@@ -1,0 +1,17 @@
+{% comment %} Publications: post cards from the _articles collection, newest first, without the featured article (spec 12.1). {% endcomment %}
+{% assign c = include.content %}
+{% assign posts = site.articles | where_exp: "a", "a.slug != c.featured.post" | sort: 'date' | reverse %}
+
+{% if posts.size > 0 %}
+<section class="fsi fsi-pub-section" aria-labelledby="fsi-posts-title">
+  <div class="fsi-wrap">
+    <div class="fsi-pub-section__inner">
+      <div class="fsi-pub-section__head">
+        <h2 id="fsi-posts-title">{{ c.posts.title }}</h2>
+        <p>{{ c.posts.intro }}</p>
+      </div>
+      {% include sifloraPostCards.html posts=posts %}
+    </div>
+  </div>
+</section>
+{% endif %}

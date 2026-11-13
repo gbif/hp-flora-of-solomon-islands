@@ -1,0 +1,35 @@
+{% comment %}
+  Publications: books (spec 12.1). Cover (an object: 1 px rule, 3 px corners), title at h4,
+  authors or editors, publisher and date, language tag, ISBN, one link to the book's page.
+{% endcomment %}
+{% assign c = include.content %}
+
+<section class="fsi fsi-pub-section" aria-labelledby="fsi-books-title">
+  <div class="fsi-wrap">
+    <div class="fsi-pub-section__inner">
+      <div class="fsi-pub-section__head">
+        <h2 id="fsi-books-title">{{ c.books_title }}</h2>
+        <p>{{ c.books_intro }}</p>
+      </div>
+      <ul class="fsi-cards fsi-cards--books" role="list">
+        {% for b in c.books %}
+        <li>
+          <article class="fsi-card fsi-book" aria-labelledby="fsi-book-{{ forloop.index }}">
+            <img class="fsi-book__cover" src="{{ b.cover | relative_url }}" alt="{{ b.cover_alt | escape }}" width="{{ b.cover_width }}" height="{{ b.cover_height }}" loading="lazy">
+            <div class="fsi-book__text">
+              <h3 id="fsi-book-{{ forloop.index }}" class="fsi-book__title">{{ b.title }}</h3>
+              <p class="fsi-card__meta">{{ b.people }}</p>
+              <p class="fsi-book__published">{{ b.published }}</p>
+              <div class="fsi-book__tags">
+                <span class="fsi-tag">{{ b.language }}</span>
+                <span class="fsi-book__isbn">ISBN <span class="fsi-code">{{ b.isbn }}</span></span>
+              </div>
+              <a class="fsi-book__link" href="{{ b.link }}"{% if b.hreflang %} hreflang="{{ b.hreflang }}"{% endif %}>{{ b.link_text }}</a>
+            </div>
+          </article>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

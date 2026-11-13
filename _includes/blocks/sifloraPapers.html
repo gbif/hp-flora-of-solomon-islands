@@ -1,0 +1,29 @@
+{% comment %}
+  Publications: research articles, newest first (spec 12.1). Journal and citation, title,
+  authors, abstract clamped to two lines, and the DOI as the card's only link.
+{% endcomment %}
+{% assign c = include.content %}
+
+<section class="fsi fsi-pub-section" aria-labelledby="fsi-papers-title">
+  <div class="fsi-wrap">
+    <div class="fsi-pub-section__inner">
+      <div class="fsi-pub-section__head">
+        <h2 id="fsi-papers-title">{{ c.papers_title }}</h2>
+        <p>{{ c.papers_intro }}</p>
+      </div>
+      <ul class="fsi-cards fsi-cards--papers" role="list">
+        {% for p in c.papers %}
+        <li>
+          <article class="fsi-card fsi-paper" aria-labelledby="fsi-paper-{{ forloop.index }}">
+            <p class="fsi-paper__source"><i>{{ p.journal }}</i> {{ p.citation }} · {{ p.year }}</p>
+            <h3 id="fsi-paper-{{ forloop.index }}" class="fsi-card__title">{{ p.title }}</h3>
+            <p class="fsi-card__meta">{{ p.authors }}</p>
+            <p class="fsi-paper__abstract">{{ p.abstract }}</p>
+            <a class="fsi-paper__doi" href="https://doi.org/{{ p.doi }}">https://doi.org/{{ p.doi }}</a>
+          </article>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

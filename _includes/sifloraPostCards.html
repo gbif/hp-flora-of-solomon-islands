@@ -1,0 +1,15 @@
+{% comment %}
+  Post cards (design spec 12.2): title and author; the whole card is the link.
+  Used by the Posts block on /publications and by "More posts" on each post page.
+  Parameter: posts (documents from the _articles collection).
+{% endcomment %}
+<ul class="fsi-cards fsi-cards--posts" role="list">
+  {% for post in include.posts %}
+  <li>
+    <a class="fsi-card fsi-card--link" href="{{ post.url | relative_url }}">
+      <span class="fsi-card__title">{{ post.title }}</span>
+      <span class="fsi-card__meta">{{ post.author }}</span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

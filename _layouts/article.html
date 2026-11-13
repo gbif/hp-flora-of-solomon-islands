@@ -1,0 +1,55 @@
+---
+layout: base
+description: A post in the _articles collection (Publications), design spec 12.3
+---
+{% comment %}
+  Reading column 680 px: breadcrumb, title, byline (author and role; date; for a translated
+  post, "Translated by Claude Opus. N-minute read."), abstract as the standfirst, then the text
+  with its floated figures (_includes/sifloraFigure.html), then "More posts".
+  N = words in the text, leaving out figures, divided by 220 and rounded up.
+{% endcomment %}
+{%- assign t = site.data[page.lang].publications.post_page | default: site.data.publications.post_page -%}
+{%- assign listing_url = '/publications/' | relative_url -%}
+
+{%- assign chunks = content | split: '<figure' -%}
+{%- capture text_only -%}{% for chunk in chunks %}{% if forloop.first %}{{ chunk }}{% else %}{{ chunk | split: '</figure>' | last }}{% endif %} {% endfor %}{%- endcapture -%}
+{%- assign words = text_only | strip_html | number_of_words -%}
+{%- assign minutes = words | divided_by: 220.0 | ceil -%}
+
+<div class="fsi fsi-post">
+  <div class="fsi-post__wrap">
+    <article class="fsi-post__article" aria-labelledby="fsi-post-title">
+      <header class="fsi-post__header">
+        <nav class="fsi-post__crumb" aria-label="Breadcrumb"><a href="{{ listing_url }}">{{ t.breadcrumb }}</a></nav>
+        <h1 id="fsi-post-title">{{ page.title }}</h1>
+        <div class="fsi-post__byline">
+          <span>{{ page.author }}{% if page.role %}, {{ page.role }}{% endif %}</span>
+          <span class="fsi-post__muted">{% if page.date_text %}{{ page.date_text }}{% else %}<time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%-d %B %Y' }}</time>{% endif %}</span>
+          {% if page.translated %}{% assign read_time = t.read_time | replace: '{n}', minutes %}<span class="fsi-post__muted">{{ t.translated }} {{ read_time }}</span>{% endif %}
+        </div>
+      </header>
+
+      {% if page.abstract %}
+      <section class="fsi-post__abstract" aria-labelledby="fsi-abstract-label">
+        <h2 id="fsi-abstract-label">{{ t.abstract }}</h2>
+        <p>{{ page.abstract }}</p>
+      </section>
+      {% endif %}
+
+      <div class="fsi-prose">
+        {{ content }}
+      </div>
+    </article>
+
+    {%- assign others = site.articles | where_exp: "a", "a.url != page.url" | sort: 'date' | reverse -%}
+    {% if others.size > 0 %}
+    <section class="fsi-post__more" aria-labelledby="fsi-more-title">
+      <div class="fsi-post__more-head">
+        <h2 id="fsi-more-title">{{ t.more }}</h2>
+        <a href="{{ listing_url }}">{{ t.all }}</a>
+      </div>
+      {% include sifloraPostCards.html posts=others %}
+    </section>
+    {% endif %}
+  </div>
+</div>

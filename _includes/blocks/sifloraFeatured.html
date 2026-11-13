@@ -1,0 +1,34 @@
+{% comment %}
+  Publications: featured article. Label, title at h1 size, byline, then a photo floated right
+  with the abstract and the opening paragraph of the text wrapping round it, and a
+  "Read the full article…" link (spec 12.1). No translation note here.
+{% endcomment %}
+{% assign c = include.content %}
+{% assign f = c.featured %}
+{% assign post = site.articles | where: "slug", f.post | first %}
+
+{% if post %}
+<section class="fsi fsi-pub-section fsi-pub-section--lead" aria-labelledby="fsi-featured-title">
+  <div class="fsi-wrap">
+    <div class="fsi-pub-section__inner">
+      <div class="fsi-featured">
+        <p class="fsi-featured__label">{{ f.label }}</p>
+        <h2 id="fsi-featured-title" class="fsi-featured__title">{{ post.title }}</h2>
+        <div class="fsi-featured__byline">
+          <span>{{ post.author }}{% if post.role %}, {{ post.role }}{% endif %}</span>
+          <span class="fsi-featured__date"><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%-d %B %Y' }}</time></span>
+        </div>
+        <div class="fsi-featured__body">
+          <figure class="fsi-featured__figure">
+            <div class="fsi-photo"><img src="{{ f.image | relative_url }}" alt="{{ f.image_alt | escape }}" width="1200" height="800"></div>
+            <figcaption>{{ f.caption }}</figcaption>
+          </figure>
+          <p>{{ post.abstract }}</p>
+          {{ post.excerpt }}
+          <p class="fsi-featured__more"><a href="{{ post.url | relative_url }}">{{ f.read_more }}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}

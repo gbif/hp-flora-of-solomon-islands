@@ -1,0 +1,9 @@
+{% comment %} Publications: page header. h1 at the h2 size, intro in ink-muted (spec 12.1). {% endcomment %}
+{% assign c = include.content %}
+
+<header class="fsi fsi-pub-header">
+  <div class="fsi-wrap">
+    <h1>{{ c.title }}</h1>
+    <p>{{ c.intro }}</p>
+  </div>
+</header>
