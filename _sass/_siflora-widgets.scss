@@ -12,6 +12,65 @@ body > footer.fsi-orgbar {
   display: block;
 }
 
+// Keep the footer at the bottom of the window while the widget is still empty: the body
+// becomes a column at least the window's height, and <main> takes the spare space.
+// <main> and the theme's wrapper <div> are columns too, so that an empty #root (below)
+// can stretch over the space between the navbar and the footer.
+body:has(> main #root.gbif) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  > main {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    > div:has(> #root.gbif) {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+// Throbber while the widget loads. Until the widget library has fetched its data and
+// drawn the page, #root holds nothing but the widget's own <style> element. Meanwhile
+// #root fills the empty space between the navbar and the footer, and the throbber sits
+// in the middle of that space (its own size taken off by the transform).
+// Spinner (assets/images/ui/loading.gif): "Herbert Kickl.gif" by ING Kutzi,
+// CC BY-SA 4.0, via Wikimedia Commons,
+// https://commons.wikimedia.org/wiki/File:Herbert_Kickl.gif (used unchanged).
+#root.gbif:not(:has(> :not(style))) {
+  flex: 1 0 auto;
+  position: relative;
+}
+
+#root.gbif:not(:has(> :not(style)))::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  transform: translate(-50%, -50%);
+  background: url("/assets/images/ui/loading.gif") center / contain no-repeat;
+}
+
+// The GIF animates and can't be paused from CSS, so with reduced motion show a word instead.
+@media (prefers-reduced-motion: reduce) {
+  #root.gbif:not(:has(> :not(style)))::before {
+    content: "Loading…";
+    width: auto;
+    height: auto;
+    padding: 12px 16px;
+    background-image: none;
+    color: $fsi-ink-muted;
+    font-size: 15px;
+  }
+}
+
 // /occurrence/search fills the viewport. The widget library reads the viewport height
 // from a hidden probe element it adds to <body> (inline height: 100svh), so shortening
 // the probe by the bar's height leaves room for the 56 px organisation bar.
