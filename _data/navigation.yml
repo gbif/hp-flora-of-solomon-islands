@@ -1,11 +1,11 @@
 # Main menu. Labels are free text; the widget URLs are fixed.
 # For another language, copy this file to _data/<lang>/navigation.yml and translate it.
 # To come: Species list (when the checklist exists), About, News (when the first post exists).
+# Collections was taken down on 2026-11-14: the specimens are held in several herbaria, and the
+# only registered holder page is the NMNS institution. It returns when the holder pages exist.
 
 - text: Specimens
   href: /occurrence/search
-- text: Collections  # interim target: the one holder registered in the data; follows the holder decision
-  href: /institution/0803e79c-bc17-4649-bd86-33c66bbf99ac
 - text: Dataset
   href: /dataset/154947b6-0e29-40da-962f-a0d6e3f12a07
 - text: Living photos

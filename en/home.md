@@ -135,7 +135,4 @@ composition:
         - title: Read about the dataset
           description: Metadata, licence and citation, and the full Darwin Core Archive to download.
           href: /dataset/154947b6-0e29-40da-962f-a0d6e3f12a07
-        - title: See where the sheets are held
-          description: The institution and collection behind the specimens, and where they are held.
-          href: /institution/0803e79c-bc17-4649-bd86-33c66bbf99ac
 ---
