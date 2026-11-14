@@ -1,5 +1,5 @@
 // GBIF widget pages. Their look comes from the theme block in _includes/js/config.js;
-// this file only handles the page around the widget.
+// this file handles the page around the widget and the few overrides in spec section 7.
 
 // The theme's widget layout paints the page ground and hides the footer with an
 // inline <style>, so these selectors are one step more specific.
@@ -17,6 +17,49 @@ body > footer.fsi-orgbar {
 // the probe by the bar's height leaves room for the 56 px organisation bar.
 body:has(> footer.fsi-orgbar) #smallViewportHeightElement {
   height: calc(100svh - 56px) !important;
+}
+
+// Content column (dataset, institution, collection and single-record pages): line its
+// edges up with the navbar and footer content, so 1280 px with the site gutter inside.
+// The widget centres the column in a `g-max-w-screen-xl` box (1280 px) inside a band
+// with its own padding (16 px, 32 px from 1024 px). If a widget update renames the
+// class, these rules stop matching and the page falls back to the widget's own width.
+#root.gbif :has(> .g-max-w-screen-xl) {
+  padding-left: $fsi-gutter;
+  padding-right: $fsi-gutter;
+}
+
+#root.gbif .g-max-w-screen-xl {
+  max-width: $fsi-wrap - 2 * 40px; // 40 px: the largest value of $fsi-gutter
+}
+
+// The 48 px bar above the column (the dataset DOI tag on the right) runs full width,
+// so give it padding that puts its contents on the column edges, and drop the tag's
+// own end margins. Only on pages with the column: on /occurrence/search the same bar
+// holds the view tabs and stays as it is.
+#root.gbif:has(.g-max-w-screen-xl) > .g-h-12 {
+  $edge: unquote("max(#{$fsi-gutter}, (100% - #{$fsi-wrap - 2 * 40px}) / 2)");
+  padding-left: $edge;
+  padding-right: $edge;
+
+  > :last-child,
+  > :last-child a:last-child {
+    margin-right: 0;
+  }
+}
+
+// Page title: keep it to the width of the main column below it (the Description card
+// on the dataset page), not the full column plus sidebar. The widget switches the body
+// to two columns in script (from 1024 px wide): a 250 px sidebar, 300 px from 1280 px,
+// with a 1rem gap. Match those classes so the title only narrows while the sidebar shows.
+#root.gbif:has(.g-grid-cols-\[1fr_250px\]) .g-max-w-screen-xl > h1 {
+  max-width: calc(100% - 250px - 1rem);
+}
+
+@media (min-width: 1280px) {
+  #root.gbif:has(.xl\:g-grid-cols-\[1fr_300px\]) .g-max-w-screen-xl > h1 {
+    max-width: calc(100% - 300px - 1rem);
+  }
 }
 
 // Result count above the occurrence views ("13,647 records"). The widget renders it
